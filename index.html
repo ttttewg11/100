@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการข้อมูล</title>
+    <!-- ดึง CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container fade-in">
+        <div class="header">
+            <h1>🗂️ ระบบจัดการข้อมูล</h1>
+            <p>เข้าสู่ระบบเพื่อจัดการข้อมูลของคุณ</p>
+        </div>
+
+        <div class="content">
+            <!-- Login Form -->
+            <div id="loginSection" class="login-form">
+                <div class="welcome-message">
+                    <h2>🔐 เข้าสู่ระบบ</h2>
+                    <p>กรุณาเข้าสู่ระบบเพื่อเริ่มใช้งาน</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">👤 ชื่อผู้ใช้:</label>
+                    <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">🔒 รหัสผ่าน:</label>
+                    <input type="password" id="password" placeholder="กรอกรหัสผ่าน">
+                </div>
+                
+                <button class="btn" onclick="login()">เข้าสู่ระบบ</button>
+            </div>
+
+            <!-- Main Application -->
+            <div id="mainApp" class="main-app hidden">
+                <div id="userInfo" class="user-info">
+                    <h2>👋 ยินดีต้อนรับ!</h2>
+                    <p>คุณสามารถเพิ่มข้อมูลใหม่และจัดการข้อมูลที่มีอยู่ได้</p>
+                    <button class="btn btn-secondary" onclick="logout()">ออกจากระบบ</button>
+                </div>
+
+                <!-- Add Data Form -->
+                <div class="form-group">
+                    <label for="dataTitle">📝 หัวข้อ:</label>
+                    <input type="text" id="dataTitle" placeholder="กรอกหัวข้อข้อมูล">
+                </div>
+
+                <div class="form-group">
+                    <label for="dataDescription">📄 รายละเอียด:</label>
+                    <textarea id="dataDescription" placeholder="กรอกรายละเอียดข้อมูล"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🖼️ รูปภาพ:</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage()">
+                        <div class="file-input" onclick="document.getElementById('imageInput').click()">
+                            📷 คลิกเพื่อเลือกรูปภาพ
+                        </div>
+                    </div>
+                    <img id="imagePreview" class="image-preview hidden" alt="ตัวอย่างรูปภาพ">
+                </div>
+
+                <button class="btn" onclick="addData()">➕ เพิ่มข้อมูล</button>
+
+                <!-- Search Section -->
+                <div class="search-section" style="margin-top: 40px; margin-bottom: 30px;">
+                    <h2 style="color: #333; margin-bottom: 20px; text-align: center;">🔍 ค้นหาข้อมูล</h2>
+                    <div class="form-group">
+                        <input type="text" id="searchInput" placeholder="🔎 ค้นหาจากหัวข้อหรือรายละเอียด..." oninput="searchData()">
+                    </div>
+                    <div class="search-filters" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="filter-btn active" onclick="filterData('all')">📋 ทั้งหมด</button>
+                        <button class="filter-btn" onclick="filterData('with-image')">🖼️ มีรูปภาพ</button>
+                        <button class="filter-btn" onclick="filterData('no-image')">📝 ข้อความเท่านั้น</button>
+                        <button class="filter-btn" onclick="sortData('newest')">⏰ ใหม่ล่าสุด</button>
+                        <button class="filter-btn" onclick="sortData('oldest')">📅 เก่าสุด</button>
+                    </div>
+                    <div id="searchResults" style="color: #666; text-align: center; font-style: italic;"></div>
+                </div>
+
+                <!-- Data List -->
+                <div id="dataList" class="data-list">
+                    <h2 style="color: #333; margin-bottom: 20px; text-align: center;">📋 ข้อมูลที่บันทึกไว้</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ดึง JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
